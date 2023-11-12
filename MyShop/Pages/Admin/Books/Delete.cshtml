@@ -1,0 +1,49 @@
+﻿@page
+@using System.Data.SqlClient
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment webHostEnvironment
+@inject Microsoft.Extensions.Configuration.IConfiguration config
+@using MyShop.MyHelpers
+@attribute [RequireAuth(RequiredRole = "admin")]
+@{
+    string connectionString = config.GetConnectionString("DefaultConnection");
+}
+@{
+    string id = Request.Query["id"];
+    try
+    {        
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string sqlSelect = "SELECT image_filename FROM books WHERE id=@id";
+            using (SqlCommand command = new SqlCommand(sqlSelect, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        string imageFileName = reader.GetString(0);
+                        string imageFolder = webHostEnvironment.WebRootPath + "/images/books/";
+                        string imageFullPath = System.IO.Path.Combine(imageFolder, imageFileName);
+                        System.IO.File.Delete(imageFullPath);
+                        Console.WriteLine("Delete Image " + imageFullPath);
+                    }
+                }
+            }
+
+            string sql = "DELETE FROM books WHERE id=@id";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    Response.Redirect("/Admin/Books/Index");
+}
+

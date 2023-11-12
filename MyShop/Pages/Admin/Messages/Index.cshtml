@@ -1,0 +1,70 @@
+﻿@page
+@model MyShop.Pages.Admin.Messages.IndexModel
+@{
+}
+
+
+<br />
+<h2>Received Messages</h2>
+
+<table class="table">
+    <thread>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Subject</th>
+            <th>CreatedAt</th>
+            <th>Action</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var item in Model.listMessages)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td>@item.Subject</td>
+                <td>@item.CreatedAt</td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" href="/Admin/Messages/Details?id=@item.Id">Details</a>
+                    <a class="btn btn-danger btn-sm" href="/Admin/Messages/Delete?id=@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@if (Model.totalPages < 10) {
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.totalPages; i++) {
+            <li class="page-item"><a class="page-link" href="?page=@i">@i</a></li>
+        }
+    </ul>
+</nav>
+}
+else { //display a dropdown list
+    <form>
+        <label>Page</label>
+        <select name="page" onchange="this.form.submit()">
+            @for(int i = 1; i <= Model.totalPages; i++) {
+                @if (i == Model.page) {
+                    <option value='@i' selected>@i</option>
+                }
+                else
+                {
+                    <option value='@i'>@i</option>
+                }
+            }
+        </select>
+    </form>
+}
+
+
+
+

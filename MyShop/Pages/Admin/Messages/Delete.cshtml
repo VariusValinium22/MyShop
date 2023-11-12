@@ -1,0 +1,29 @@
+﻿@page
+@using System.Data.SqlClient;
+@using MyShop.MyHelpers;
+@inject Microsoft.Extensions.Configuration.IConfiguration config
+@attribute [RequireAuth(RequiredRole = "admin")]
+@{
+    string connectionString = config.GetConnectionString("DefaultConnection");
+}
+@{
+    string deleteId = Request.Query["id"];
+    try
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            string sql = "DELETE FROM messages WHERE id=@id";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", deleteId);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    Response.Redirect("/Admin/Messages/Index");
+}
