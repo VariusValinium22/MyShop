@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyShop.MyHelpers;
+using MyShop.MyHelpers;   
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 

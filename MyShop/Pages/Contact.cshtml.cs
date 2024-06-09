@@ -110,7 +110,7 @@ namespace MyShop.Pages
 
             try
             {
-                EmailSender.SendEmail(Email, username, emailSubject, emailMessage);
+                EmailSender.SendEmail(Email, username, emailSubject, emailMessage).Wait();
                 SuccessMessage = "Your message has been transmitted successfully.";
             }
             catch (Exception ex)

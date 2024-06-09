@@ -22,19 +22,19 @@ namespace MyShop.MyHelpers
         //    var msg = MailHelper.CreateSingleEmail(
         //        from, to, subject, plainTextContent, htmlContent);
 
-        //    var response = client.SendEmailAsync(msg);
+        //    var response = await client.SendEmailAsync(msg);
         //}
 
         //Brevo CodeBlock
-        public static void SendEmail(string toEmail, string username, string subject, string message)
+        public static async System.Threading.Tasks.Task SendEmail(string toEmail, string username, string subject, string message)
         {
-            string apiKey = "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";
+            string apiKey = "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";
 
             Configuration.Default.ApiKey["api-key"] = apiKey;
 
             var apiInstance = new TransactionalEmailsApi();
             string SenderName = "Martin Young";
-            string SenderEmail = "martingyoung@hotmail.com";
+            string SenderEmail = "martingyoung@gmail.com";
             
             SendSmtpEmailSender emailSender = new SendSmtpEmailSender(SenderName, SenderEmail);
             SendSmtpEmailTo emailReceiver1 = new SendSmtpEmailTo(toEmail, username);
@@ -46,7 +46,8 @@ namespace MyShop.MyHelpers
             string TextContent = message;
             
             var sendSmtpEmail = new SendSmtpEmail(emailSender, To, null, null, HtmlContent, TextContent, subject);
-            CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
+            //CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
+            var result = await System.Threading.Tasks.Task.Run(() => apiInstance.SendTransacEmail(sendSmtpEmail));
             Console.WriteLine("Response: \n" + result.ToJson());
         }
     }
