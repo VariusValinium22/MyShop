@@ -1,8 +1,48 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "How to login";
 }
 <h1>@ViewData["Title"]</h1>
-
-<p>Use this page to detail your site's privacy policy.</p>
+<p>
+    This project allows a user to login as a Client and navigate the store, place books into their shopping cart and
+    also buy the books.
+</p>
+<div style="padding-left: 40px">
+<p>
+    Use these emails for logging into the main website:
+</p>
+<table>
+    <thead>
+        <tr>
+                <th style="padding-right: 30px;">Role</th>
+                <th style="padding-right: 30px;">User Name</th>
+                <th style="padding-right: 30px;">Password</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+                <td style="padding-right: 30px;">Admin</td>
+                <td style="padding-right: 30px;">martingyoung@hotmail.com</td>
+                <td style="padding-right: 30px;">111qqqQQQ</td>
+        </tr>
+        <tr>
+                <td style="padding-right: 30px;">Client</td>
+                <td style="padding-right: 30px;">martingyoung@gmail.com</td>
+                <td style="padding-right: 30px;">111qqqQQQ</td>
+        </tr>
+        <tr>
+                <td style="padding-right: 30px;">Paypal</td>
+                <td style="padding-right: 30px;">sb-xbxlm27652379@personal.example.com</td>
+                <td style="padding-right: 30px;">111qqqQQQ</td>
+        </tr>
+    </tbody>
+</table>
+<p>
+</div>
+    <strong>NOTE:</strong><br>
+    In order to get the website to show the book items, you need to go to the AppSettings.json file in Visual Studio.<br>
+    Comment out the connectionString to the SQLExpress local database.<br>
+    Then uncomment the connectionString to the Azure SQLServer database.<br>
+    DON'T forget to swap it back so you do not use up your FREE database DTUs!!!
+</p>
