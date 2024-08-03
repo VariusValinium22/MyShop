@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MyShop.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/page.css" />
 </head>
 
 <script>
@@ -141,14 +142,16 @@
     @if (ViewData["NoContainer"] == null)
     {
         <div class="container mt-3">
-            <main role="main" class="pb-3">
+            <main role="main" class="pb-3 page-content">
                 @RenderBody()
             </main>
         </div>
     }
     else
     {
+        <div class="page__section">
         @RenderBody()
+        </div>
     }
 
     
